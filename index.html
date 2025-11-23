@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lake Sanctuary | Eco-Retreat & City Escape</title>
+    
+    <!-- Google Fonts: Playfair Display (Serif/Luxury) and Lato (Sans/Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            /* Color Palette: Earthy, Warm, Organic */
+            --primary-green: #2C3E30; /* Dark Forest Green */
+            --accent-gold: #D4A373;   /* Sunset/Warm Light */
+            --bg-sand: #F3F1E7;       /* Soft Beige/Paper */
+            --text-dark: #1a1a1a;
+            --text-light: #f5f5f5;
+            --whatsapp-green: #25D366;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-sand);
+            color: var(--text-dark);
+            line-height: 1.7;
+            padding-bottom: 90px; /* Space for sticky bar */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .sub-heading, .bar-title {
+            font-family: 'Playfair Display', serif; /* "Quiet Luxury" Typography */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HERO SECTION (Video Loop) --- */
+        .hero-section {
+            position: relative;
+            height: 100vh; /* Full screen height */
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Subtle darkening for text readability */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+        }
+
+        .hero-content {
+            z-index: 1;
+            color: var(--text-light);
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        .section-padding {
+            padding: 100px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .sub-heading {
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--primary-green);
+            line-height: 1.2;
+        }
+
+        .narrative-text {
+            font-size: 1.15rem;
+            max-width: 700px;
+            color: #4a4a4a;
+            margin-bottom: 2rem;
+        }
+
+        /* --- INTRO SECTION --- */
+        .intro-section {
+            text-align: left;
+            border-bottom: 1px solid rgba(44, 62, 48, 0.1);
+        }
+
+        /* --- ROOMS CARD GRID --- */
+        .rooms-section {
+            background-color: #efede6; /* Slightly darker shade for contrast */
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .room-card {
+            background: var(--white);
+            border-radius: 4px; /* Minimalist sharp edges or very slight radius */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .room-image {
+            height: 280px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .room-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            color: var(--primary-green);
+            padding: 5px 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            border-radius: 2px;
+        }
+
+        .room-details {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .room-details h3 {
+            margin-bottom: 10px;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+        }
+
+        .room-desc {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .amenity-list {
+            list-style: none;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .amenity-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .amenity-list i {
+            color: var(--accent-gold);
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+            font-size: 1rem;
+        }
+
+        /* --- STICKY BOOKING BAR (Mobile First) --- */
+        .sticky-booking-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            z-index: 1000;
+            border-top: 1px solid var(--accent-gold);
+            animation: slideUp 0.8s ease-out 1s backwards;
+        }
+
+        .bar-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bar-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bar-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--primary-green);
+        }
+
+        .bar-subtitle {
+            font-size: 0.8rem;
+            color: #777;
+            font-style: italic;
+            margin-top: 2px;
+        }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            font-size: 0.95rem;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-green);
+            color: var(--bg-sand);
+            text-align: center;
+            padding: 60px 20px 100px; /* Extra padding bottom for sticky bar */
+        }
+        
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMATIONS (Scroll Triggered) --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+        
+        /* Mobile specific adjustments */
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .bar-subtitle { display: none; } /* Save space on small phones */
+            .sticky-booking-bar { padding: 12px 15px; }
+            .whatsapp-btn { padding: 10px 20px; font-size: 0.9rem; }
+            .bar-title { font-size: 1rem; }
+            .section-padding { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECTION 1: HERO VIDEO -->
+    <header class="hero-section">
+        <div class="video-overlay"></div>
+        <!-- Using a high quality placeholder video of a lake sunset -->
+        <video autoplay muted loop playsinline class="hero-video" poster="https://images.unsplash.com/photo-1439853949127-626eb5f1783f?q=80&w=1600&auto=format&fit=crop">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-lake-and-forest-during-sunset-39726-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="hero-content">
+            <h1 class="reveal-on-scroll active">Silence. Nature. You.</h1>
+            <p class="reveal-on-scroll active" style="transition-delay: 0.3s;">The city escape you've been waiting for.</p>
+        </div>
+    </header>
+
+    <!-- SECTION 2: THE NARRATIVE (Our Story) -->
+    <section class="intro-section section-padding">
+        <div class="container">
+            <div class="reveal-on-scroll">
+                <span class="sub-heading">The Experience</span>
+                <h2>Disconnect to Reconnect</h2>
+                <p class="narrative-text">
+                    Just 3 hours from the city chaos, time stops. We are an eco-retreat where the only notifications are bird calls, the hum of insects, and the rustle of leaves. 
+                    <br><br>
+                    Experience the warmth of golden sunsets reflecting off the water and the cool breeze of the lake. This is "Quiet Luxury"—where nature is the amenity and peace is the product.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE ACCOMMODATION (Products) -->
+    <section class="rooms-section section-padding" id="rooms">
+        <div class="container">
+            <div class="reveal-on-scroll">
+                <span class="sub-heading">Your Sanctuary</span>
+                <h2>Choose Your Stay</h2>
+            </div>
+            
+            <div class="room-grid">
+                <!-- Room 1: Deluxe -->
+                <div class="room-card reveal-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1587061949409-02df41d5e562?q=80&w=800&auto=format&fit=crop');">
+                        <div class="room-tag">Best View</div>
+                    </div>
+                    <div class="room-details">
+                        <h3>Deluxe Swiss Cottage</h3>
+                        <p class="room-desc">The ultimate lakeside luxury. Wake up to panoramic views of the water from your bed.</p>
+                        <ul class="amenity-list">
+                            <li><i class="fas fa-wind"></i> Air Conditioning</li>
+                            <li><i class="fas fa-water"></i> Private Lake Deck</li>
+                            <li><i class="fas fa-bath"></i> En-suite Luxury Bath</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Room 2: Normal Swiss -->
+                <div class="room-card reveal-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1449156493391-d2cfa28e468b?q=80&w=800&auto=format&fit=crop');"></div>
+                    <div class="room-details">
+                        <h3>Swiss Cottage</h3>
+                        <p class="room-desc">Comfort immersed in greenery. A cozy wooden sanctuary perfect for couples.</p>
+                        <ul class="amenity-list">
+                            <li><i class="fas fa-fan"></i> Fan Cooled</li>
+                            <li><i class="fas fa-leaf"></i> Private Garden Sit-out</li>
+                            <li><i class="fas fa-bed"></i> Queen Size Bed</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Room 3: Camp -->
+                <div class="room-card reveal-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="room-image" style="background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop');">
+                         <div class="room-tag">Adventure</div>
+                    </div>
+                    <div class="room-details">
+                        <h3>Luxury Camp</h3>
+                        <p class="room-desc">Raw adventure without sacrificing comfort. Sleep under the stars in premium canvas.</p>
+                        <ul class="amenity-list">
+                            <li><i class="fas fa-campground"></i> Premium Canvas Tent</li>
+                            <li><i class="fas fa-fire"></i> Bonfire Access</li>
+                            <li><i class="fas fa-restroom"></i> Premium Shared Bath</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE STICKY "SMART" BAR (Conversion) -->
+    <div class="sticky-booking-bar">
+        <div class="bar-content">
+            <div class="bar-text">
+                <span class="bar-title">Ready to escape?</span>
+                <span class="bar-subtitle">Chat directly with the owner</span>
+            </div>
+            <!-- WhatsApp Link: Replace number with actual -->
+            <a href="https://wa.me/1234567890?text=Hi,%20I%20am%20interested%20in%20planning%20a%20stay%20at%20The%20Lake%20Sanctuary" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> Plan Your Stay
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <h3>The Lake Sanctuary</h3>
+            <p>Pure Nature. Pure Silence.</p>
+            <p style="margin-top: 20px; font-size: 0.8rem;">&copy; 2025 The Lake Sanctuary. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCROLL ANIMATION SCRIPT -->
+    <script>
+        // Simple Intersection Observer for "Scrollytelling" fade-in effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const elements = document.querySelectorAll('.reveal-on-scroll');
+            elements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
